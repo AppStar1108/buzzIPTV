@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.extremeiptv.buzziptv"
-        minSdkVersion 6
+        minSdkVersion 9
         targetSdkVersion 6
     }
 
