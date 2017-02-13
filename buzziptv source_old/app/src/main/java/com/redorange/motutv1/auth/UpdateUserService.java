@@ -1,14 +1,16 @@
 package com.redorange.motutv1.auth;
 
 import android.content.Context;
-import android.util.Log;
+
 import com.ipmacro.CCore;
 import com.redorange.motutv1.app.Motutv1Application;
 import com.redorange.motutv1.utils.BackgroundExecutor;
 import com.redorange.motutv1.utils.SynHtmlUtil;
-import java.net.URLEncoder;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.net.URLEncoder;
 
 public class UpdateUserService
 {
@@ -58,7 +60,8 @@ public class UpdateUserService
   {
     String str = URLEncoder.encode(paramString);
     //return "http://69.64.62.156:8080/channel/stb/checkTermOfValidity.htm?str=" + str;
-    return "http://62.210.182.14:8080//channel/stb/checkTermOfValidity.htm?str=" + str;
+    //return "http://62.210.182.14:8080//channel/stb/checkTermOfValidity.htm?str=" + str;
+    return "http://extremeiptv.com:8080//channel/stb/checkTermOfValidity.htm?str=" + str;
   }
 
   public String getValue(String paramString)

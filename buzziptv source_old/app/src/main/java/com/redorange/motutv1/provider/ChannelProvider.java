@@ -2,27 +2,15 @@ package com.redorange.motutv1.provider;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.util.Log;
+
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.redorange.motutv1.model.ChannelType;
 import com.redorange.motutv1.parser.ChannelParser;
 import com.redorange.motutv1.utils.HttpUtil;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.util.List;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
-import org.json.JSONObject;
+
+import java.util.List;
 
 public class ChannelProvider
 {
@@ -93,7 +81,8 @@ public class ChannelProvider
 		  p2.onSuccess(localList);
 		  p2.onFinish();*/
 		
-	  HttpUtil.get("http://62.210.182.14:8080/channel_resource/channel/liveListNew.html", new AsyncHttpResponseHandler()
+	  //HttpUtil.get("http://62.210.182.14:8080/channel_resource/channel/liveListNew.html", new AsyncHttpResponseHandler()
+      HttpUtil.get("http://extremeiptv.com:8080/channel_resource/channel/liveListNew.html", new AsyncHttpResponseHandler()
 	  {
 		  public void onFailure(Throwable paramThrowable)
 		  {

@@ -1,13 +1,5 @@
 package com.redorange.motutv1.db;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
-import java.util.HashMap;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -17,10 +9,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
+import java.util.HashMap;
+
 public class EpgDatas {
 
 	public static Array epgdata;
-	private static String epg_url = "http://62.210.182.14:8080/channel_resource/live/program.html";
+	//private static String epg_url = "http://62.210.182.14:8080/channel_resource/live/program.html";
+	private static String epg_url = "http://extremeiptv.com:8080/channel_resource/live/program.html";
 	public static JSONObject myepgdata;
 	public static JSONArray myepgreleaseList;
 	private static HashMap<String, JSONArray> epgmap;
