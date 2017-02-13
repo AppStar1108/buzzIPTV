@@ -6,8 +6,8 @@ android {
 
     defaultConfig {
         applicationId "com.extremeiptv.buzziptv"
-        minSdkVersion 9
-        targetSdkVersion 6
+        minSdkVersion 6
+        targetSdkVersion 19
     }
 
     buildTypes {
@@ -19,6 +19,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.1.0'
     compile files('libs/libs.jar')
+    compile 'com.android.support:support-v4:19.1.0'
+    //compile 'com.android.support:appcompat-v7:19.1.0'
 }

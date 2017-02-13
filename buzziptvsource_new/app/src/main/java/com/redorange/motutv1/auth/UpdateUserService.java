@@ -29,7 +29,7 @@ public class UpdateUserService
   private JSONObject root;
   String sn;
 
-  public UpdateUserService(Context paramContext)
+ public UpdateUserService(Context paramContext)
   {
     this.mApp = ((Motutv1Application)paramContext.getApplicationContext());
     this.sn = this.mApp.getSN();
@@ -106,6 +106,10 @@ public class UpdateUserService
     public abstract void onFinish();
 
     public abstract void onSuccess(String paramString);
+  }
+  public String getSn()
+  {
+      return this.sn;
   }
 }
 

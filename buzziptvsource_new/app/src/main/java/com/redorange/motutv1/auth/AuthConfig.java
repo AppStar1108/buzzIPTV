@@ -2,9 +2,7 @@ package com.redorange.motutv1.auth;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.provider.Settings.Secure;
-import android.util.Log;
 
 public class AuthConfig
 {
@@ -30,7 +28,7 @@ public class AuthConfig
 
   private void doActivate(String paramString)
   {
-    //String str = productSN(paramString);
+   // String str = productSN(paramString);
 	  String str = paramString;
     //Log.i("yy", "sn=" + str);
     if (str.contains("-"))

@@ -624,11 +624,12 @@ public class LiveTvActivity extends Activity implements View.OnClickListener
 		      {
 		        //paramThrowable.printStackTrace();
 		        Toast.makeText(LiveTvActivity.this.getApplicationContext(), LiveTvActivity.this.getString(R.string.data_load_fail), 1).show();
+				loadingFail();
 		      }
 		
 		      public void onFinish()
 		      {
-		          
+		          //loadingFail();
 		      }
 		
 		      @SuppressLint("NewApi")
@@ -657,6 +658,8 @@ public class LiveTvActivity extends Activity implements View.OnClickListener
 							updateEpgInfo();
 						} catch (JSONException e) {
 							//e.printStackTrace();
+						  loadingFail();
+
 						}
 			          Bitmap bmplogo = BitmapFactory.decodeFile(localChannel.getLogo());
 			          LiveTvActivity.this.imgIcon.setBackground(null);
@@ -794,12 +797,28 @@ public class LiveTvActivity extends Activity implements View.OnClickListener
 	    ((LinearLayout)findViewById(R.id.livetv_epg_1)).setVisibility(8);
 		((LinearLayout)findViewById(R.id.livetv_epg_2)).setVisibility(8);
 		((LinearLayout)findViewById(R.id.livetv_epg_3)).setVisibility(8);
-		EpgDatas.Initialize();
+		//EpgDatas.Initialize();
 	    initView();
 	    initData();
 	    refresUserInfo();
 	    
 	    this.dialog.show();
+		  Thread t= new Thread(new Runnable() {
+			  @Override
+			  public void run() {
+				  synchronized (this) {
+					  runOnUiThread(new Runnable() {
+						  @Override
+						  public void run() {
+							  LiveTvActivity.this.loadData();
+						  }
+					  });
+				  }
+			  }
+		  });
+		  t.start();
+		  EpgDatas.Initialize(LiveTvActivity.this);
+
 	  }
 	 
 	  private void refresUserInfo()
@@ -808,6 +827,7 @@ public class LiveTvActivity extends Activity implements View.OnClickListener
 		  {
 			  public void onFauil()
 			  {
+				  loadingFail();
 			  }
 
 			  public void onFinish()
@@ -849,14 +869,14 @@ public class LiveTvActivity extends Activity implements View.OnClickListener
 					  i = 0;
 					  bool1 = false;
 				  }
-				  synchronized (this) {
+				/*synchronized (this) {
 			    	  runOnUiThread(new Runnable() {
 			    		  @Override
 			              public void run() {
 			    			  LiveTvActivity.this.loadData();
 			              }
 			          });
-				  }
+				  }*/
 			  }
 		  });
 	  }
@@ -870,7 +890,16 @@ public class LiveTvActivity extends Activity implements View.OnClickListener
 	      this.operationLive.close();
 	  }
 	
-	  public void updateEpgInfo() throws JSONException
+	public void loadingFail()
+	{
+		Intent toLogin = new Intent(this,loginActivity.class);
+		startActivity(toLogin);
+		if(this.dialog!=null)
+			this.dialog.dismiss();
+
+		return;
+	}
+	public boolean updateEpgInfo() throws JSONException
 	  {
 		  String key = "p_"+curChannel.getId();
 		  JSONArray arr = EpgDatas.getEpgProgram(key);
@@ -883,7 +912,8 @@ public class LiveTvActivity extends Activity implements View.OnClickListener
 			  ((TextView)findViewById(R.id.livetv_epg_time_1)).setVisibility(0);
 			  ((TextView)findViewById(R.id.livetv_epg_info_1)).setVisibility(8);
 			  ((TextView)findViewById(R.id.livetv_epg_time_1)).setText("Program Information Not Found.");
-			  return;
+			  loadingFail();
+			  return false;
 		  }
 		  if(arr.length() == 0){
 			  ((LinearLayout)findViewById(R.id.livetv_epg_1)).setVisibility(0);
@@ -892,7 +922,7 @@ public class LiveTvActivity extends Activity implements View.OnClickListener
 			  ((TextView)findViewById(R.id.livetv_epg_time_1)).setVisibility(0);
 			  ((TextView)findViewById(R.id.livetv_epg_info_1)).setVisibility(8);
 			  ((TextView)findViewById(R.id.livetv_epg_time_1)).setText("Program Information Not Found.");
-			  return;
+			  return true;
 		  }
 		  ((TextView)findViewById(R.id.livetv_epg_info_1)).setVisibility(0);
 		  ((LinearLayout)findViewById(R.id.livetv_epg_1)).setVisibility(0);
@@ -933,6 +963,7 @@ public class LiveTvActivity extends Activity implements View.OnClickListener
 				  break;
 			  }
 		  }
+		  return true;
 	  }
 	  
 	  @SuppressLint("NewApi")

@@ -1,5 +1,7 @@
 package com.redorange.motutv1.db;
 
+import com.redorange.motutv1.LiveTvActivity;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -26,7 +28,7 @@ public class EpgDatas {
 	public static JSONArray myepgreleaseList;
 	private static HashMap<String, JSONArray> epgmap;
 	
-	public static void Initialize()
+	public static void Initialize(final LiveTvActivity mActivity)
 	{
 		epgmap = new HashMap<String, JSONArray>();
 		Thread thread = new Thread(new Runnable(){
