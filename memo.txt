@@ -1,0 +1,2 @@
+It was built for several android devices (bluestack ,xbox)and sdk versions.
+02/13 Monday
